@@ -29,6 +29,11 @@ class LinkController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $link->setCreatedAt(new \DateTime());
+            $link->setUpdatedAt(new \DateTime());
+            $link->setUsesCount(0);
+            $link->setIsActive(true);
+
             $linkRepository->save($link, true);
 
             return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);

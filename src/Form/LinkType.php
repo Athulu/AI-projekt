@@ -14,11 +14,11 @@ class LinkType extends AbstractType
         $builder
             ->add('link')
             ->add('fullLink')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('isActive')
-            ->add('lastUsedAt')
-            ->add('usesCount')
+//            ->add('createdAt')
+//            ->add('updatedAt')
+//            ->add('isActive')
+//            ->add('lastUsedAt')
+//            ->add('usesCount')
         ;
     }
 
