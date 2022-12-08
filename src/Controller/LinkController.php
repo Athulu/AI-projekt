@@ -34,6 +34,7 @@ class LinkController extends AbstractController
             $link->setUsesCount(0);
             $link->setIsActive(true);
 
+
             $linkRepository->save($link, true);
 
             return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
