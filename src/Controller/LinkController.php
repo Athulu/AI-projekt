@@ -42,7 +42,9 @@ class LinkController extends AbstractController
             $link->setUpdatedAt(new \DateTime());
             $link->setUsesCount(0);
             $link->setIsActive(true);
-
+            if($link->getLink()==null){
+                $link->setLink(hash('crc32', $link->getFullLink()));
+            }
 
             $linkRepository->save($link, true);
 
