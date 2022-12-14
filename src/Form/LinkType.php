@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Link;
+use Doctrine\DBAL\Types\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,7 +13,7 @@ class LinkType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('link')
+            ->add('link', null, ['required' => false])
             ->add('fullLink')
 //            ->add('createdAt')
 //            ->add('updatedAt')
