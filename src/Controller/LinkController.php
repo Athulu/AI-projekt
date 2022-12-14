@@ -17,6 +17,10 @@ class LinkController extends AbstractController
     public function redirection($dodatek, Request $request, LinkRepository $linkRepository): Response
     {
         $link_item = $linkRepository->findByLink($dodatek);
+        $link_item->setLastUsedAt(new \DateTime());
+        $link_item->setUsesCount($link_item->getUsesCount()+1);
+        $linkRepository->save($link_item, true);
+
         $url = $link_item->getFullLink();
         return $this->redirect($url);
     }
@@ -72,6 +76,7 @@ class LinkController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $link->setUpdatedAt(new \DateTime());
             $linkRepository->save($link, true);
 
             return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
