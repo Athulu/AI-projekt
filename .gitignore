@@ -19,3 +19,4 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /var/data.db
+.dccache
