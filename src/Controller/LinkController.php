@@ -10,10 +10,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/link')]
+#[Route('/')]
 class LinkController extends AbstractController
 {
-    #[Route('/', name: 'app_link_index', methods: ['GET'])]
+    #[Route('/{dodatek}', name: 'app_link_dodatek', methods: ['GET'])]
+    public function redirection($dodatek, Request $request, LinkRepository $linkRepository): Response
+    {
+        $link_item = $linkRepository->findByLink($dodatek);
+        $url = $link_item->getFullLink();
+        return $this->redirect($url);
+    }
+
+
+    #[Route('/link', name: 'app_link_index', methods: ['GET'])]
     public function index(LinkRepository $linkRepository): Response
     {
         return $this->render('link/index.html.twig', [
@@ -21,7 +30,7 @@ class LinkController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_link_new', methods: ['GET', 'POST'])]
+    #[Route('/link/new', name: 'app_link_new', methods: ['GET', 'POST'])]
     public function new(Request $request, LinkRepository $linkRepository): Response
     {
         $link = new Link();
@@ -46,7 +55,7 @@ class LinkController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_link_show', methods: ['GET'])]
+    #[Route('/link/{id}', name: 'app_link_show', methods: ['GET'])]
     public function show(Link $link): Response
     {
         return $this->render('link/show.html.twig', [
@@ -54,7 +63,7 @@ class LinkController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_link_edit', methods: ['GET', 'POST'])]
+    #[Route('/link/{id}/edit', name: 'app_link_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Link $link, LinkRepository $linkRepository): Response
     {
         $form = $this->createForm(LinkType::class, $link);
@@ -72,7 +81,7 @@ class LinkController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_link_delete', methods: ['POST'])]
+    #[Route('/link/{id}', name: 'app_link_delete', methods: ['POST'])]
     public function delete(Request $request, Link $link, LinkRepository $linkRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$link->getId(), $request->request->get('_token'))) {
