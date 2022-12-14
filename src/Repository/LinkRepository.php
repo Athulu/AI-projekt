@@ -39,6 +39,28 @@ class LinkRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByLink($value): ?Link
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.link = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findByID($value): ?Link
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.id = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+
+
 //    /**
 //     * @return Link[] Returns an array of Link objects
 //     */
