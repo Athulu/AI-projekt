@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/')]
 class LinkController extends AbstractController
 {
-    #[Route('/{dodatek}', name: 'app_link_dodatek', methods: ['GET'])]
+    #[Route('/r/{dodatek}', name: 'app_link_dodatek', methods: ['GET'])]
     public function redirection($dodatek, Request $request, LinkRepository $linkRepository): Response
     {
         $link_item = $linkRepository->findByLink($dodatek);
