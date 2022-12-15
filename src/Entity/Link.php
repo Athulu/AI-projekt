@@ -35,6 +35,9 @@ class Link
     #[ORM\Column]
     private ?int $usesCount = null;
 
+    #[ORM\ManyToOne(inversedBy: 'links')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Link
     public function setUsesCount(int $usesCount): self
     {
         $this->usesCount = $usesCount;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
