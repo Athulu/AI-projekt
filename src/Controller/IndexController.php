@@ -35,7 +35,9 @@ class IndexController extends AbstractController
 
             $linkRepository->save($link, true);
 
-            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('successGetLink', $link->getFullLink());
+
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render(

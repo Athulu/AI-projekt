@@ -40,10 +40,31 @@
         <button type="submit" class="btn btn-primary">Shorten</button>
       </div>
       {{ form_end(form) }}
+      {% for message in app.flashes('successGetLink') %}
+        <div class="flex items-center justify-center my-4">
+          <div class="flex items-center justify-center space-x-4 bg-neutral-50 shadow shadow-black/25 rounded-lg p-6">
+            <div>
+              Your shorten link: <a href="{{ message }}">{{ message }}</a>
+            </div>
+            <button type="button" id="copyToClipboardBtn" class="btn btn-primary flex items-center" onclick="copyToClipboard('{{ message }}')">
+              <div className="pr-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                  <path fill-rule="evenodd" d="M13.887 3.182c.396.037.79.08 1.183.128C16.194 3.45 17 4.414 17 5.517V16.75A2.25 2.25 0 0114.75 19h-9.5A2.25 2.25 0 013 16.75V5.517c0-1.103.806-2.068 1.93-2.207.393-.048.787-.09 1.183-.128A3.001 3.001 0 019 1h2c1.373 0 2.531.923 2.887 2.182zM7.5 4A1.5 1.5 0 019 2.5h2A1.5 1.5 0 0112.5 4v.5h-5V4z" clip-rule="evenodd" />
+                </svg>
+              </div>Copy link
+            </button>
+          </div>
+        </div>
+      {% endfor %}
     </div>
 
     <div class="my-16 flex items-center justify-center">
       <img src="/undraw_link_shortener_mvf6.svg" alt="link_shortener" width="300" height="276" />
     </div>
   </div>
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text)
+    }
+  </script>
 {% endblock %}
