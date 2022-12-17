@@ -18,7 +18,7 @@ class LinkController extends AbstractController
     {
         $link_item = $linkRepository->findByLink($dodatek);
         $link_item->setLastUsedAt(new \DateTime());
-        $link_item->setUsesCount($link_item->getUsesCount()+1);
+        $link_item->setUsesCount($link_item->getUsesCount() + 1);
         $linkRepository->save($link_item, true);
 
         $url = $link_item->getFullLink();
@@ -35,7 +35,7 @@ class LinkController extends AbstractController
     }
 
     #[Route('/link/new', name: 'app_link_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, LinkRepository $linkRepository): Response
+    public function new (Request $request, LinkRepository $linkRepository): Response
     {
         $link = new Link();
         $form = $this->createForm(LinkType::class, $link);
@@ -46,7 +46,7 @@ class LinkController extends AbstractController
             $link->setUpdatedAt(new \DateTime());
             $link->setUsesCount(0);
             $link->setIsActive(true);
-            if($link->getLink()==null){
+            if ($link->getLink() == null) {
                 $link->setLink(hash('crc32', $link->getFullLink()));
             }
 
@@ -91,7 +91,7 @@ class LinkController extends AbstractController
     #[Route('/link/{id}', name: 'app_link_delete', methods: ['POST'])]
     public function delete(Request $request, Link $link, LinkRepository $linkRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$link->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $link->getId(), $request->request->get('_token'))) {
             $linkRepository->remove($link, true);
         }
 
