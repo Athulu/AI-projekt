@@ -20,3 +20,5 @@
 ###< symfony/phpunit-bridge ###
 /var/data.db
 .dccache
+.idea
+.vscode
