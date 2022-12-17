@@ -14,13 +14,7 @@ class LinkType extends AbstractType
     {
         $builder
             ->add('link', null, ['required' => false])
-            ->add('fullLink')
-//            ->add('createdAt')
-//            ->add('updatedAt')
-//            ->add('isActive')
-//            ->add('lastUsedAt')
-//            ->add('usesCount')
-        ;
+            ->add('fullLink');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
