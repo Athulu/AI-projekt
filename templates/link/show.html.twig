@@ -3,6 +3,9 @@
 {% block title %}Link{% endblock %}
 
 {% block body %}
+  {% include 'header.html.twig' %}
+
+  <div class="container my-6 mx-auto flex flex-col items-center justify-center px-6 pb-6">
     <h1>Link</h1>
 
     <table class="table">
@@ -47,4 +50,5 @@
     <a href="{{ path('app_link_edit', {'id': link.id}) }}">edit</a>
 
     {{ include('link/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
