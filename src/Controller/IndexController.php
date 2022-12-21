@@ -29,13 +29,17 @@ class IndexController extends AbstractController
             $link->setUpdatedAt(new \DateTime());
             $link->setUsesCount(0);
             $link->setIsActive(true);
+            $link->setUser($this->getUser());
             if ($link->getLink() == null) {
                 $link->setLink(hash('crc32', $link->getFullLink()));
             }
 
             $linkRepository->save($link, true);
 
-            $this->addFlash('successGetLink', $link->getFullLink());
+            $websiteUrl = $request->getSchemeAndHttpHost();
+            $this->addFlash(
+                'successGetLink', $websiteUrl . '/r/' . $link->getLink()
+            );
 
             return $this->redirectToRoute('app_index');
         }

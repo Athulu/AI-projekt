@@ -10,6 +10,11 @@
         <ul class="flex items-center space-x-2">
           <li>
             <a class="btn btn-flat-secondary hover:no-underline" href="/">Home</a>
+            {% if app.user %}
+              <a class="btn btn-flat-secondary hover:no-underline" href="/link/userlinks">My links</a>
+              <a class="btn btn-flat-secondary hover:no-underline" href="/link/userlinks">Links</a>
+              <a class="btn btn-flat-secondary hover:no-underline" href="/link/userlinks">Users</a>
+            {% endif %}
           </li>
         </ul>
       </div>
@@ -18,8 +23,18 @@
           <div class="flex h-full w-full">
             <div aria-haspopup="true" class="flex w-full cursor-pointer items-center justify-end">
               <div class="flex space-x-4">
-                <a class="btn btn-primary hover:no-underline" href="/login">Login</a>
-                <a class="btn hover:no-underline" href="/register">Register</a>
+                {# get logged in user #}
+                {% if app.user %}
+                  <div class="flex items-center">
+                    <div>{{ app.user.username }}</div>
+                    <div class="ml-4">
+                      <a class="btn btn-danger hover:no-underline" href="/logout">Logout</a>
+                    </div>
+                  </div>
+                {% else %}
+                  <a class="btn btn-primary hover:no-underline" href="/login">Login</a>
+                  <a class="btn hover:no-underline" href="/register">Register</a>
+                {% endif %}
               </div>
             </div>
           </div>

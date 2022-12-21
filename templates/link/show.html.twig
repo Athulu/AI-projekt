@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Link{% endblock %}
+{% block title %}
+  Link
+{% endblock %}
 
 {% block body %}
   {% include 'header.html.twig' %}
@@ -9,46 +11,46 @@
     <h1>Link</h1>
 
     <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ link.id }}</td>
-            </tr>
-            <tr>
-                <th>Link</th>
-                <td>{{ link.link }}</td>
-            </tr>
-            <tr>
-                <th>FullLink</th>
-                <td>{{ link.fullLink }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ link.createdAt ? link.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ link.updatedAt ? link.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>IsActive</th>
-                <td>{{ link.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>LastUsedAt</th>
-                <td>{{ link.lastUsedAt ? link.lastUsedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UsesCount</th>
-                <td>{{ link.usesCount }}</td>
-            </tr>
-        </tbody>
+      <tbody>
+        <tr>
+          <th>Id</th>
+          <td>{{ link.id }}</td>
+        </tr>
+        <tr>
+          <th>Link</th>
+          <td>{{ link.link }}</td>
+        </tr>
+        <tr>
+          <th>FullLink</th>
+          <td>{{ link.fullLink }}</td>
+        </tr>
+        <tr>
+          <th>CreatedAt</th>
+          <td>{{ link.createdAt ? link.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+          <th>UpdatedAt</th>
+          <td>{{ link.updatedAt ? link.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+          <th>IsActive</th>
+          <td>{{ link.isActive ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+          <th>LastUsedAt</th>
+          <td>{{ link.lastUsedAt ? link.lastUsedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+          <th>UsesCount</th>
+          <td>{{ link.usesCount }}</td>
+        </tr>
+      </tbody>
     </table>
 
-    <a href="{{ path('app_link_index') }}">back to list</a>
+    <a class="btn btn-primary hover:no-underline" href="{{ path('app_link_index') }}">back to list</a>
 
-    <a href="{{ path('app_link_edit', {'id': link.id}) }}">edit</a>
+    <a class="btn btn-primary hover:no-underline" href="{{ path('app_link_edit', { id: link.id }) }}">edit</a>
 
     {{ include('link/_delete_form.html.twig') }}
-    </div>
+  </div>
 {% endblock %}

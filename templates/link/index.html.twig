@@ -10,7 +10,7 @@
   <div class="container my-6 mx-auto flex flex-col items-center justify-center px-6 pb-6">
     <h1>Links</h1>
 
-    <table class="table-auto">
+    <table class="mt-6 table-auto">
       <thead>
         <tr>
           <th>Id</th>
@@ -35,9 +35,9 @@
             <td>{{ link.isActive ? 'Yes' : 'No' }}</td>
             <td>{{ link.lastUsedAt ? link.lastUsedAt|date('Y-m-d H:i:s') : '' }}</td>
             <td>{{ link.usesCount }}</td>
-            <td>
-              <a href="{{ path('app_link_show', { id: link.id }) }}">show</a>
-              <a href="{{ path('app_link_edit', { id: link.id }) }}">edit</a>
+            <td class="flex space-x-2">
+              <a class="btn btn-primary hover:no-underline" href="{{ path('app_link_show', { id: link.id }) }}">Show</a>
+              <a class="btn btn-primary hover:no-underline" href="{{ path('app_link_edit', { id: link.id }) }}">Edit</a>
             </td>
           </tr>
         {% else %}
@@ -48,6 +48,6 @@
       </tbody>
     </table>
 
-    <a href="{{ path('app_link_new') }}">Create new</a>
+    <a class="btn btn-primary hover:no-underline mt-6" href="{{ path('app_link_new') }}">Create new</a>
   </div>
 {% endblock %}

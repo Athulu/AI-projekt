@@ -29,7 +29,7 @@ class LinkController extends AbstractController
     }
 
     #[Route('/link/userlinks', name: 'app_link_index_for_user', methods: ['GET'])]
-    #[IsGranted('ROLE_ADMIN','ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN', 'ROLE_USER')]
     public function indexForUser(LinkRepository $linkRepository, UserRepository $userRepository): Response
     {
         return $this->render('link/index.html.twig', [
@@ -38,7 +38,7 @@ class LinkController extends AbstractController
     }
 
     #[Route('/link', name: 'app_link_index', methods: ['GET'])]
-    #[IsGranted('ROLE_ADMIN','ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN', 'ROLE_USER')]
     public function index(LinkRepository $linkRepository): Response
     {
         return $this->render('link/index.html.twig', [
@@ -65,11 +65,10 @@ class LinkController extends AbstractController
 
             $linkRepository->save($link, true);
 
-//            return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
             $routeName = $request->attributes->get('_route');
-            if($routeName == 'app_link_index'){
+            if ($routeName == 'app_link_index') {
                 return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
-            }else{
+            } else {
                 return $this->redirectToRoute('app_link_index_for_user', [], Response::HTTP_SEE_OTHER);
             }
         }
@@ -83,7 +82,7 @@ class LinkController extends AbstractController
 
 
     #[Route('/link/{id}', name: 'app_link_show', methods: ['GET'])]
-    #[IsGranted('ROLE_ADMIN','ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN', 'ROLE_USER')]
     public function show(Link $link): Response
     {
         return $this->render('link/show.html.twig', [
@@ -92,7 +91,7 @@ class LinkController extends AbstractController
     }
 
     #[Route('/link/{id}/edit', name: 'app_link_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_ADMIN','ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN', 'ROLE_USER')]
     public function edit(Request $request, Link $link, LinkRepository $linkRepository): Response
     {
         $form = $this->createForm(LinkType::class, $link);
@@ -102,11 +101,11 @@ class LinkController extends AbstractController
             $link->setUpdatedAt(new \DateTime());
             $linkRepository->save($link, true);
 
-//            return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
+            //            return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
             $routeName = $request->attributes->get('_route');
-            if($routeName == 'app_link_index'){
+            if ($routeName == 'app_link_index') {
                 return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
-            }else{
+            } else {
                 return $this->redirectToRoute('app_link_index_for_user', [], Response::HTTP_SEE_OTHER);
             }
         }
@@ -119,7 +118,7 @@ class LinkController extends AbstractController
 
 
     #[Route('/link/{id}', name: 'app_link_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN','ROLE_USER')]
+    #[IsGranted('ROLE_ADMIN', 'ROLE_USER')]
     public function delete(Request $request, Link $link, LinkRepository $linkRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $link->getId(), $request->request->get('_token'))) {
@@ -127,9 +126,9 @@ class LinkController extends AbstractController
         }
 
         $routeName = $request->attributes->get('_route');
-        if($routeName == 'app_link_index'){
+        if ($routeName == 'app_link_index') {
             return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
-        }else{
+        } else {
             return $this->redirectToRoute('app_link_index_for_user', [], Response::HTTP_SEE_OTHER);
         }
     }
